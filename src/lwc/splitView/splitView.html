@@ -1,0 +1,61 @@
+<template>
+    <div style="display:flex;height:fit-content;min-height:40em;" class="slds-var-m-right_medium">
+        <div class={containerClasses}>
+            <button class={toggleButtonClasses} onclick={toggleView}>
+                <lightning-icon icon-name={toggleButtonIcon}
+                                size="xx-small" 
+                                variant="bare-inverse" 
+                                alternative-text="Close Split View">
+                </lightning-icon>
+            </button>
+
+            <template if:true={isSplitViewOpen}>
+                <article aria-hidden={collapseSplitView} id="split-view-id" class="slds-split-view slds-grid slds-grid_vertical slds-grow slds-var-p-right_medium">
+                    <header class="slds-split-view__header">
+                        <div class="slds-grid slds-grid_vertical-align-center slds-var-m-bottom_xx-small">
+                            <div class="slds-has-flexi-truncate">
+                                <div class="slds-media slds-media_center">
+                                    <div class="slds-media__figure">
+                                        <lightning-icon icon-name={iconName} size={iconSize}></lightning-icon>
+                                        <span class="slds-assistive-text">{headingTitle}</span>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <h1 class="slds-text-heading_small slds-text-color_default slds-var-p-right_x-small">
+                                            <button class="slds-button slds-type-focus slds-truncate" title="">
+                                                <span class="slds-grid slds-has-flexi-truncate slds-grid_vertical-align-center">
+                                                    <span class="slds-truncate slds-var-p-right_x-small" title={headingTitle}>
+                                                        {headingTitle}
+                                                    </span>
+                                                </span>
+                                            </button>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-no-flex slds-grid">
+                                <slot name="actions"></slot>
+                            </div>
+                        </div>
+
+
+                        <div class="slds-grid slds-grid_vertical-align-center">
+                            <p class="slds-text-body_small slds-text-color_weak slds-var-m-vertical_medium">
+                                {subtitle}
+                            </p>
+                        </div>
+                    </header>
+
+                    <div class="slds-grid slds-grid_vertical">
+                        <div class="slds-split-view__list-header slds-grid">
+                            {listTitle}
+                            <div class="slds-no-flex slds-grid slds-col_bump-left">
+                                <slot name="list-actions"></slot>
+                            </div>
+                        </div>
+                        <slot name="list-items"></slot>
+                    </div>
+                </article>
+            </template>
+        </div>
+    </div>
+</template>
